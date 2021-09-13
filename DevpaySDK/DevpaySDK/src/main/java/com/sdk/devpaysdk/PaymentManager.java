@@ -143,11 +143,11 @@ public class PaymentManager {
                         if (err != null) {
                             callback.onCompletion(null, err);
                         } else {
-                            Boolean status = false;
+
                             try {
-                                status = response.getBoolean("status");
-                                if (status != null) {
-                                    callback.onCompletion(status, null);
+                                int status = response.getInt("status");
+                                if (status == 1) {
+                                    callback.onCompletion(true, null);
                                 } else {
                                     callback.onCompletion(null, new Error("Failed to parse JSON " + response.toString()));
                                 }
