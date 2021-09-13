@@ -1,0 +1,3 @@
+rootProject.name = "DevpaySDK"
+include ':app'
+include ':DevpaySDK'
