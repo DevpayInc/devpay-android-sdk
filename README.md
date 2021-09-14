@@ -50,7 +50,7 @@ Use onActivityResult callback to know about the payment confirmation
         if (requestCode == this.requestCode) {
             if (resultCode == RESULT_OK) {
                 // Get the details about the payment intent
-                PaymentIntent paymentIntent = (PaymentIntent) data.getSerializableExtra(DevpayActivity.PaymentIntentResultKey);
+                Boolean status = (Boolean) data.getSerializableExtra(DevpayActivity.PaymentIntentResultKey);
             }
         }
     }
@@ -80,7 +80,6 @@ BillingAddress address = new BillingAddress("street",
 
 PaymentDetail paymentDetail = new PaymentDetail("name",
         <amount>,
-        "currency",
         card,
         address);
 
@@ -90,14 +89,14 @@ DevpayClient client = new DevpayClient(this, config);
 client.confirmPayment(paymentDetail, new DevpayClient.DevPayClientCallback() {
 
     @Override
-    public void onCompletion(PaymentIntent intent, Error error) {
+    public void onCompletion(Boolean status, Error error) {
 
         if (error != null) {
             // Read the error
         }
 
-        if (intent != null) {
-            // Use paymnt intent
+        if (status != null) {
+            // Payment successful
         }
     }
 });
